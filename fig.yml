@@ -1,0 +1,34 @@
+#bukslapi:
+#  build: ./docker/bukslapi
+#  links:
+#    - database
+#ppserver:
+#  build: ./docker/ppserver
+#  volumes_from:
+#    - bukslapi 
+#  ports:
+#    - "80:80"
+#  links:
+#    - bukslapi 
+database:
+  build: ./docker/database
+  volumes_from:
+    - dbdata
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=buksl_dev
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=pass
+  ports:
+    - "3400:3306"
+dbdata:
+  build: ./docker/db_data
+
+#ppfrontend:
+#  build: ./docker/ppfrontend
+
+#ppapi:
+#  build: ./docker/ppapi
+
+ppadmin:
+   build: ./docker/ppadmin
